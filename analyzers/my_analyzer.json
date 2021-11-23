@@ -1,0 +1,29 @@
+{
+  "settings": {
+    "analysis": {
+      "analyzer": {
+        "my_analyzer": {
+          "tokenizer" : "standard",
+          "filter" : ["custom_stopper", "custom_stems", "custom_synonyms"]
+          }
+        },
+        "filter" : {
+            "custom_stopper" : {
+                "type" : "stop",
+                "stopwords_path" : "analyze/stopwords.txt"
+            },
+            "custom_stems" : {
+                "type" : "stemmer_override",
+                "rules_path" : "analyze/stem.txt"
+            },
+            "custom_synonyms" : {
+                "type" : "synonym",
+                "synonyms_path" : "analyze/synonym.txt"
+
+            }
+        }
+        }
+      }
+    }
+
+
