@@ -1,0 +1,51 @@
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<div class="s006">
+
+
+		{% if hits %}
+		<hgroup class="mb20">
+			<h1>Search Results</h1>
+			<h2 class="lead" id="results"><strong class="text-danger">{{ num_results }}</strong> results were found for the search for <strong class="text-danger">{{  query  }}</strong></h2>
+			<h2 class="lead" id="results"> About <strong class="text-danger">({{  time  }}ms)</strong></h2>
+		</hgroup>
+
+		<section id='song_section' class="col-md-8">
+			{% for hit in hits %}
+			<article class="search-result row">
+				<div class="col-md-12">
+					<h3><b>{{ hit._source.இயக்குனர் }}</b></h3>
+					<ul class="meta-search">
+						<li><i class="glyphicon glyphicon-tags"></i> <span>Director: {{ hit._source.இயக்குனர்  }} </span></li>
+						<li><i class="glyphicon glyphicon-tags"></i> <span>Movie: {{ hit._source.திரைப்படம்  }} </span></li>
+						<li><i class="glyphicon glyphicon-tags"></i> <span>Released date: {{ hit._source['வெளியிடப்பட்ட தேதி']}}</span></li>
+						<li><i class="glyphicon glyphicon-tags"></i> <span>Verdict: {{ hit._source.தீர்ப்பு  }} </span></li>
+						<li><i class="glyphicon glyphicon-tags"></i> <span>Rating: {{ hit._source.மதிப்பீடு  }} </span></li>
+					</ul>
+					<p style="white-space: pre-line">{{ hit._source.விமர்சனம் }}</p>
+				</div>
+				<div class="col-md-6">
+
+				</div>
+				<span class="clearfix borda"></span>
+			</article>
+			{% endfor %}
+		</section>
+
+
+<!--		{% else %}-->
+<!--			{% if init %}-->
+<!--				<hgroup class="mb20">-->
+<!--				<h1>Director Database</h1>-->
+<!--				<h2 class="lead">Please enter the search query in the box</strong></h2>-->
+<!--			</hgroup>-->
+<!--			{% else %}-->
+<!--			<hgroup class="mb20">-->
+<!--				<h1>Search Results</h1>-->
+<!--				<h2 class="lead"><strong class="text-danger">0</strong> results were found for the search for <strong class="text-danger">{{  query  }}</strong></h2>-->
+<!--			</hgroup>-->
+			{% endif %}
+		{% endif %}
+	</div>
