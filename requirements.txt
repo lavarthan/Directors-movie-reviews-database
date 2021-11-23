@@ -1,0 +1,4 @@
+flask
+elasticsearch_dsl
+requests
+elasticsearch

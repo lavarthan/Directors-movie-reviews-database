@@ -19,7 +19,8 @@ Directory Structure
 
 Demo
 ---
-* Install ElasticSearch 
+* Install ElasticSearch
+* Install packages `pip install -r requirements.txt`
 * Add 'analyze' folder in config of Elasticsearch and add files from analyzers
 * Run ElasticSearch
 * Add index(uncomment indexing part if not manually added) and add data (`processed_review_bulk.json`)
