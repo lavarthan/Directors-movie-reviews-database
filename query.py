@@ -61,20 +61,18 @@ def multi_match(query, operator='or'):
 
 def wild_card_search(query):
     q = {
-        "query": {
-            "bool": {
-                "must": [
-                    {
-                        "query_string": {
-                            "query": query,
-                            "fields": ["திரைப்படம்", "இயக்குனர்", "விமர்சனம்", " தீர்ப்பு", "மதிப்பீடு",
-                                       " வெளியிடப்பட்ட தேதி"]
-                        }
-                    }
-                ]
-            }
+    "query": {
+        "wildcard" : {
+                       "இயக்குனர்" : query
+        }
+    },
+    "_source": ["திரைப்படம்", "இயக்குனர்", "விமர்சனம்", " தீர்ப்பு", "மதிப்பீடு", " வெளியிடப்பட்ட தேதி"],
+    "highlight": {
+        "fields" : {
+                  "இயக்குனர்" : {}
         }
     }
+}
     return q
 
 
@@ -87,7 +85,7 @@ def best_search(query):
             "multi_match": {
                 "query": query,
                 "fields": ["திரைப்படம்", "இயக்குனர்", "விமர்சனம்", " தீர்ப்பு", "மதிப்பீடு", " வெளியிடப்பட்ட தேதி"],
-                "operator": 'or',
+                "operator": "OR",
                 "type": "best_fields"
             }
         }
@@ -108,8 +106,8 @@ def exact_search(query):
 
 
 def process_query(query):
-    # if any(word in query for word in top_words):
-    #     query_body = best_search(query)
+    if any(word in query for word in top_words):
+        query_body = best_search(query)
     if '''"''' in query:
         query_body = exact_search(query)
     elif '*' in query:
